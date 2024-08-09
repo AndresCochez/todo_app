@@ -21,12 +21,19 @@ form {
     margin-bottom: 20px;
 }
 
-input[type="text"] {
+input[type="text"], textarea {
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 60%;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: calc(100% - 22px);
+    height: 80px;
+    resize: none;
 }
 
 button {
