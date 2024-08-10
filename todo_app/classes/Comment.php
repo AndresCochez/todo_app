@@ -22,7 +22,7 @@ class Comment {
 
     public function setComment($comment) {
         if (empty($comment)) {
-            throw new Exception("Commentaar mag niet leeg zijn.");
+            throw new Exception("Comment cannot be empty.");
         }
         $this->comment = htmlspecialchars(strip_tags($comment));
     }
@@ -53,6 +53,21 @@ class Comment {
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Method to delete comments by task ID
+    public function deleteByTaskId($task_id) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE task_id = :task_id";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':task_id', $task_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            print_r($stmt->errorInfo());
+            return false;
+        }
     }
 }
 ?>

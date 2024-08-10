@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 09 aug 2024 om 15:37
+-- Gegenereerd op: 10 aug 2024 om 15:44
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -34,13 +34,6 @@ CREATE TABLE `lists` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Gegevens worden geëxporteerd voor tabel `lists`
---
-
-INSERT INTO `lists` (`id`, `user_id`, `name`, `description`) VALUES
-(3, 1, 'Test', 'Dit is een test');
-
 -- --------------------------------------------------------
 
 --
@@ -56,15 +49,6 @@ CREATE TABLE `tasks` (
   `is_done` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Gegevens worden geëxporteerd voor tabel `tasks`
---
-
-INSERT INTO `tasks` (`id`, `list_id`, `title`, `description`, `deadline`, `is_done`) VALUES
-(3, 3, 'Werkje 1', 'skdvbsjdkfmghjkl', '0000-00-00', 1),
-(4, 3, 'Werkje 2', 'dqfijggsjfgjik', '0000-00-00', NULL),
-(5, 3, 'sldvflsdfk', 'dcl,sd,lcfsd,l', '2024-08-14', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -78,16 +62,6 @@ CREATE TABLE `task_comments` (
   `comment` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `task_comments`
---
-
-INSERT INTO `task_comments` (`id`, `task_id`, `user_id`, `comment`, `created_at`) VALUES
-(1, 4, 1, 'sqkvqlgllùgdùnlgnlkgf', '2024-08-09 00:12:05'),
-(2, 3, 1, 'EZKJFKQFJKL%Q%KJL', '2024-08-09 00:12:14'),
-(3, 3, 1, 'DIPDJFAEZDJID', '2024-08-09 00:12:18'),
-(4, 3, 1, 'SFDKNLVKNLQSDLKN', '2024-08-09 00:12:23');
 
 -- --------------------------------------------------------
 
@@ -149,19 +123,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `lists`
 --
 ALTER TABLE `lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT voor een tabel `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT voor een tabel `task_comments`
 --
 ALTER TABLE `task_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -189,7 +163,7 @@ ALTER TABLE `tasks`
 -- Beperkingen voor tabel `task_comments`
 --
 ALTER TABLE `task_comments`
-  ADD CONSTRAINT `task_comments_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`),
+  ADD CONSTRAINT `task_comments_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `task_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
