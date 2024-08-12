@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 10 aug 2024 om 15:44
+-- Gegenereerd op: 12 aug 2024 om 13:34
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `files`
+--
+
+CREATE TABLE `files` (
+  `id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `uploaded_on` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `files`
+--
+
+INSERT INTO `files` (`id`, `file_name`, `file_path`, `uploaded_on`) VALUES
+(12, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:20:33'),
+(13, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:27:44');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `lists`
 --
 
@@ -33,6 +54,13 @@ CREATE TABLE `lists` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `lists`
+--
+
+INSERT INTO `lists` (`id`, `user_id`, `name`, `description`) VALUES
+(11, 1, 'Test', 'slc,qsl,c,');
 
 -- --------------------------------------------------------
 
@@ -48,6 +76,14 @@ CREATE TABLE `tasks` (
   `deadline` date DEFAULT NULL,
   `is_done` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `list_id`, `title`, `description`, `deadline`, `is_done`) VALUES
+(30, 11, 'zkodzoék', 'zal;saz,;s', '0000-00-00', NULL),
+(31, 11, 'scx;kz;d', 'zx,;l;z,szl,s', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -87,6 +123,12 @@ INSERT INTO `users` (`id`, `username`, `password`) VALUES
 --
 
 --
+-- Indexen voor tabel `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `lists`
 --
 ALTER TABLE `lists`
@@ -120,16 +162,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT voor een tabel `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT voor een tabel `lists`
 --
 ALTER TABLE `lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT voor een tabel `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT voor een tabel `task_comments`

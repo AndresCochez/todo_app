@@ -240,6 +240,48 @@ foreach ($tasks as $task) {
                         </tbody>
                     </table>
 
+                    <div class="container mt-5">
+                        <!-- File upload form -->
+                        <h3 class="mb-3">Upload File</h3>
+                        <form method="POST" action="" enctype="multipart/form-data" class="mb-4">
+                            <div class="form-group">
+                                <input type="file" name="uploaded_file" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+
+                        <h3 class="mb-3">Uploaded Files</h3>
+                        <form method="POST" action="" class="mb-4">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>File Name</th>
+                                        <th>Task Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($files as $file): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($file['file_name']); ?></td>
+                                            <td>
+                                                <input type="text" name="task_names[<?php echo $file['id']; ?>]" value="<?php echo htmlspecialchars($file['task_name'] ?? ''); ?>" class="form-control">
+                                            </td>
+                                            <td>
+                                                <a href="?download_id=<?php echo $file['id']; ?>" class="btn btn-success btn-sm">Download</a>
+                                                <a href="?delete_id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <button type="submit" name="update_tasks" class="btn btn-warning">Update Task Names</button>
+                        </form>
+                    </div>
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
                     <!-- Delete list button -->
                     <form method="POST" action="dashboard.php" style="display:inline;">
                         <input type="hidden" name="delete_list_id" value="<?php echo $list['id']; ?>">
