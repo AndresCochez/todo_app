@@ -25,10 +25,8 @@ class Database {
 
     // Method to handle file uploads and insert file metadata into the database
     public function uploadFile($file) {
-        // Directory to upload files
         $uploadDir = "uploads/";
 
-        // Ensure the directory exists and is writable
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
@@ -37,17 +35,13 @@ class Database {
         $targetFilePath = $uploadDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        // Allowed file types
         $allowedTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf', 'doc', 'docx');
 
         if (in_array($fileType, $allowedTypes)) {
-            // Move the file to the specified directory
             if (move_uploaded_file($file["tmp_name"], $targetFilePath)) {
-                // Insert file metadata into the database
                 $query = "INSERT INTO files (file_name, file_path, uploaded_on) VALUES (:fileName, :filePath, NOW())";
                 $stmt = $this->conn->prepare($query);
 
-                // Bind parameters
                 $stmt->bindParam(':fileName', $fileName);
                 $stmt->bindParam(':filePath', $targetFilePath);
 
@@ -66,7 +60,7 @@ class Database {
 
     // Method to fetch all files from the database
     public function fetchFiles() {
-        $query = "SELECT id, file_name, file_path FROM files";
+        $query = "SELECT id, file_name, file_path, task_name FROM files";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,9 +77,7 @@ class Database {
             $file = $stmt->fetch(PDO::FETCH_ASSOC);
             $filePath = $file['file_path'];
 
-            // Check if the file exists on the server
             if (file_exists($filePath)) {
-                // Set headers to initiate file download
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
@@ -114,12 +106,10 @@ class Database {
             $file = $stmt->fetch(PDO::FETCH_ASSOC);
             $filePath = $file['file_path'];
 
-            // Delete the file from the server
             if (file_exists($filePath)) {
                 unlink($filePath);
             }
 
-            // Delete the file record from the database
             $query = "DELETE FROM files WHERE id = :id";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':id', $fileId);
@@ -132,6 +122,17 @@ class Database {
             echo "Invalid file ID.";
         }
     }
+
+    // Method to update task names
+    public function updateTaskNames($task_names) {
+        foreach ($task_names as $file_id => $task_name) {
+            $query = "UPDATE files SET task_name = :task_name WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':task_name', $task_name);
+            $stmt->bindParam(':id', $file_id);
+            $stmt->execute();
+        }
+    }
 }
 
 // Instantiate the Database class
@@ -141,19 +142,11 @@ $conn = $database->getConnection();
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['uploaded_file'])) {
-        // Handle file upload
         $database->uploadFile($_FILES['uploaded_file']);
     }
     if (isset($_POST['update_tasks'])) {
-        // Update task names
         $task_names = $_POST['task_names'] ?? [];
-        foreach ($task_names as $file_id => $task_name) {
-            $query = "UPDATE files SET task_name = :task_name WHERE id = :id";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':task_name', $task_name);
-            $stmt->bindParam(':id', $file_id);
-            $stmt->execute();
-        }
+        $database->updateTaskNames($task_names);
     }
 }
 

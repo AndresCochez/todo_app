@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 aug 2024 om 13:34
+-- Gegenereerd op: 12 aug 2024 om 13:45
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -31,16 +31,18 @@ CREATE TABLE `files` (
   `id` int(11) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `file_path` varchar(255) NOT NULL,
-  `uploaded_on` datetime DEFAULT current_timestamp()
+  `uploaded_on` datetime DEFAULT current_timestamp(),
+  `task_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `files`
 --
 
-INSERT INTO `files` (`id`, `file_name`, `file_path`, `uploaded_on`) VALUES
-(12, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:20:33'),
-(13, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:27:44');
+INSERT INTO `files` (`id`, `file_name`, `file_path`, `uploaded_on`, `task_name`) VALUES
+(12, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:20:33', 'sdjcj'),
+(13, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:27:44', 'Andres'),
+(14, 'Icoon (3).png', 'uploads/Icoon (3).png', '2024-08-12 13:37:05', 'Dreke');
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT voor een tabel `lists`
