@@ -155,36 +155,60 @@ foreach ($tasks as $task) {
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 {
+            margin: 0;
+        }
+
+        .header-container form {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
+    <div class="header-container">
         <h1>Your Todo Lists</h1>
-        
-        <!-- Form for adding lists -->
-        <form method="POST" class="form-inline">
-            <input type="text" name="list_name" placeholder="New List Name" required>
-            <textarea name="list_description" placeholder="List Description" required></textarea>
-            <button type="submit" class="btn btn-primary">Create List</button>
+        <br>
+        <form method="POST" action="login.php">
+            <button type="submit" name="logout" class="btn btn-secondary">Logout</button>
         </form>
-        
-        <!-- Display Lists -->
-        <?php if (count($lists) > 0): ?>
-            <?php foreach ($lists as $list): ?>
-                <div>
-                    <h2><?php echo htmlspecialchars($list['name']); ?></h2>
-                    <p><?php echo htmlspecialchars($list['description']); ?></p>
-                    
-                    <!-- Form for adding tasks to the list -->
-                    <form method="POST" class="form-inline">
-                        <input type="hidden" name="list_id" value="<?php echo $list['id']; ?>">
-                        <input type="text" name="task_title" placeholder="Task Title" required>
-                        <textarea name="task_description" placeholder="Task Description" required></textarea>
-                        <input type="date" name="task_deadline">
-                        <button type="submit" class="btn btn-primary">Add Task</button>
-                    </form>
+    </div>
 
-                    <!-- Display Tasks -->
+    <!-- Form for adding lists -->
+    <form method="POST" class="form-inline">
+        <input type="text" name="list_name" placeholder="List Name" required>
+        <textarea name="list_description" placeholder="List Description" required></textarea>
+        <button type="submit" class="btn btn-primary">Create List</button>
+    </form>
+
+    <!-- Display Lists -->
+    <?php if (count($lists) > 0): ?>
+        <?php foreach ($lists as $list): ?>
+            <div>
+                <h2><?php echo htmlspecialchars($list['name']); ?></h2>
+                <p><?php echo htmlspecialchars($list['description']); ?></p>
+
+                <!-- Form for adding tasks to the list -->
+                <form method="POST" class="form-inline">
+                    <input type="hidden" name="list_id" value="<?php echo $list['id']; ?>">
+                    <input type="text" name="task_title" placeholder="Task Title" required>
+                    <textarea name="task_description" placeholder="Task Description" required></textarea>
+                    <input type="date" name="task_deadline">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Create Task</button>
+                </form>
+
+                <!-- Display Tasks -->
+                <?php if (count($tasks) > 0): ?>
                     <table class="table mt-3">
                         <thead>
                             <tr>
@@ -232,24 +256,41 @@ foreach ($tasks as $task) {
                                         <!-- Delete task button -->
                                         <form method="POST" action="dashboard.php" style="display:inline;">
                                             <input type="hidden" name="delete_task_id" value="<?php echo $task['id']; ?>">
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete Task</button>
                                         </form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                <?php else: ?>
+                    <p>No tasks available.</p>
+                <?php endif; ?>
 
-                    <div class="container mt-5">
-                        <!-- File upload form -->
+                <!-- Delete List button -->
+                <form method="POST" action="dashboard.php" style="display:inline;">
+                    <input type="hidden" name="delete_list_id" value="<?php echo $list['id']; ?>">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this list?');">Delete List</button>
+                </form>
+
+                <?php if (count($tasks) > 0): ?>
+                    <button id="show-upload-btn" class="btn btn-primary">Show Upload File</button>
+                    <button id="show-files-btn" class="btn btn-secondary">Show Uploaded Files</button>
+
+                    <!-- File upload form -->
+                    <div id="upload-section" style="display: none;">
                         <h3 class="mb-3">Upload File</h3>
                         <form method="POST" action="" enctype="multipart/form-data" class="mb-4">
                             <div class="form-group">
                                 <input type="file" name="uploaded_file" class="form-control" required>
                             </div>
+                            <br>
                             <button type="submit" class="btn btn-primary">Upload</button>
                         </form>
+                    </div>
 
+                    <!-- Uploaded files table -->
+                    <div id="files-section" style="display: none;">
                         <h3 class="mb-3">Uploaded Files</h3>
                         <form method="POST" action="" class="mb-4">
                             <table class="table table-striped">
@@ -278,178 +319,49 @@ foreach ($tasks as $task) {
                             <button type="submit" name="update_tasks" class="btn btn-warning">Update Task Names</button>
                         </form>
                     </div>
-                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                    <!-- Delete list button -->
-                    <form method="POST" action="dashboard.php" style="display:inline;">
-                        <input type="hidden" name="delete_list_id" value="<?php echo $list['id']; ?>">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this list?');">Delete List</button>
-                    </form>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No lists available.</p>
-        <?php endif; ?>
-        
-        <!-- Display Messages -->
-        <?php if (isset($message)) echo "<p>$message</p>"; ?>
-    </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const showUploadBtn = document.getElementById('show-upload-btn');
+                            const uploadSection = document.getElementById('upload-section');
+                            const showFilesBtn = document.getElementById('show-files-btn');
+                            const filesSection = document.getElementById('files-section');
+
+                            // Toggle the upload section visibility
+                            showUploadBtn.addEventListener('click', function () {
+                                if (uploadSection.style.display === 'none') {
+                                    uploadSection.style.display = 'block';
+                                    filesSection.style.display = 'none'; // Hide the files section if shown
+                                } else {
+                                    uploadSection.style.display = 'none';
+                                }
+                            });
+
+                            // Toggle the files section visibility
+                            showFilesBtn.addEventListener('click', function () {
+                                if (filesSection.style.display === 'none') {
+                                    filesSection.style.display = 'block';
+                                    uploadSection.style.display = 'none'; // Hide the upload section if shown
+                                } else {
+                                    filesSection.style.display = 'none';
+                                }
+                            });
+                        });
+                    </script>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No lists available.</p>
+    <?php endif; ?>
+    
+    <!-- Display Messages -->
+    <?php if (isset($message)) echo "<p>$message</p>"; ?>
+</div>
+
 
     <!-- Include JS for handling AJAX -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Event handler for sorting tasks
-            $('a[data-sort]').click(function(event) {
-                event.preventDefault();
-
-                let sortType = $(this).data('sort');
-                let sortOrder = $(this).data('order') === 'ASC' ? 'DESC' : 'ASC';
-                $(this).data('order', sortOrder);
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'dashboard.php',
-                    data: {
-                        sort_type: sortType,
-                        sort_order: sortOrder
-                    },
-                    success: function(response) {
-                        let data = JSON.parse(response);
-                        let tasks = data.tasks;
-                        let comments = data.comments;
-
-                        // Update the task list
-                        let taskList = $('#task-list');
-                        taskList.empty();
-                        tasks.forEach(function(task) {
-                            let commentList = comments[task.id] || [];
-                            let commentHtml = commentList.map(function(comment) {
-                                return `<li><strong>${comment.username}:</strong> ${comment.comment} <small>${comment.created_at}</small></li>`;
-                            }).join('');
-
-                            taskList.append(`
-                                <tr${task.is_overdue ? ' style="background-color: #f8d7da;"' : ''}>
-                                    <td>${task.title}</td>
-                                    <td>${task.deadline}</td>
-                                    <td>${task.description}</td>
-                                    <td>${task.is_overdue ? 'Overdue' : task.days_remaining + ' days remaining'}</td>
-                                    <td>
-                                        <input type="checkbox" class="update-status" data-task-id="${task.id}" ${task.is_done ? 'checked' : ''}>
-                                    </td>
-                                    <td>
-                                        <form class="comment-form" method="POST">
-                                            <input type="hidden" name="task_id" value="${task.id}">
-                                            <textarea name="comment" placeholder="Add a comment"></textarea>
-                                            <button type="submit" class="btn btn-secondary">Add Comment</button>
-                                        </form>
-                                        <ul>${commentHtml}</ul>
-                                    </td>
-                                    <td>
-                                        <form method="POST" action="dashboard.php" style="display:inline;">
-                                            <input type="hidden" name="delete_task_id" value="${task.id}">
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            `);
-                        });
-                    }
-                });
-            });
-
-            // Event handler for updating task status
-            $(document).on('change', '.update-status', function() {
-                let taskId = $(this).data('task-id');
-                let isDone = $(this).is(':checked');
-                
-                $.ajax({
-                    type: 'POST',
-                    url: 'dashboard.php',
-                    data: {
-                        task_id: taskId,
-                        is_done: isDone
-                    },
-                    success: function(response) {
-                        alert(response);
-                    }
-                });
-            });
-
-            // Event handler for adding comments
-            $(document).on('submit', '.comment-form', function(event) {
-                event.preventDefault();
-                
-                let form = $(this);
-                let formData = form.serialize();
-                
-                $.ajax({
-                    type: 'POST',
-                    url: 'dashboard.php',
-                    data: formData,
-                    success: function(response) {
-                        let data = JSON.parse(response);
-                        if (data.status === 'success') {
-                            let taskId = form.find('input[name="task_id"]').val();
-                            $.ajax({
-                                type: 'POST',
-                                url: 'dashboard.php',
-                                data: {
-                                    sort_type: 'deadline', // default sort type
-                                    sort_order: 'ASC' // default sort order
-                                },
-                                success: function(response) {
-                                    let data = JSON.parse(response);
-                                    let tasks = data.tasks;
-                                    let comments = data.comments;
-                                    
-                                    // Update the task list
-                                    let taskList = $('#task-list');
-                                    taskList.empty();
-                                    tasks.forEach(function(task) {
-                                        let commentList = comments[task.id] || [];
-                                        let commentHtml = commentList.map(function(comment) {
-                                            return `<li><strong>${comment.username}:</strong> ${comment.comment} <small>${comment.created_at}</small></li>`;
-                                        }).join('');
-
-                                        taskList.append(`
-                                            <tr${task.is_overdue ? ' style="background-color: #f8d7da;"' : ''}>
-                                                <td>${task.title}</td>
-                                                <td>${task.deadline}</td>
-                                                <td>${task.description}</td>
-                                                <td>${task.is_overdue ? 'Overdue' : task.days_remaining + ' days remaining'}</td>
-                                                <td>
-                                                    <input type="checkbox" class="update-status" data-task-id="${task.id}" ${task.is_done ? 'checked' : ''}>
-                                                </td>
-                                                <td>
-                                                    <form class="comment-form" method="POST">
-                                                        <input type="hidden" name="task_id" value="${task.id}">
-                                                        <textarea name="comment" placeholder="Add a comment"></textarea>
-                                                        <button type="submit" class="btn btn-secondary">Add Comment</button>
-                                                    </form>
-                                                    <ul>${commentHtml}</ul>
-                                                </td>
-                                                <td>
-                                                    <form method="POST" action="dashboard.php" style="display:inline;">
-                                                        <input type="hidden" name="delete_task_id" value="${task.id}">
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        `);
-                                    });
-                                }
-                            });
-                        } else {
-                            alert(data.message);
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

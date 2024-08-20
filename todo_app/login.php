@@ -7,16 +7,21 @@ $database = new Database();
 $db = $database->getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user = new User($db);
-    $user->username = $_POST['username'];
-    $user->password = $_POST['password'];
+    // Check if 'username' and 'password' keys are set in the POST data
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $user = new User($db);
+        $user->username = $_POST['username'];
+        $user->password = $_POST['password'];
 
-    if ($user->login()) {
-        $_SESSION['user_id'] = $user->id;
-        header("Location: dashboard.php");
-        exit();
+        if ($user->login()) {
+            $_SESSION['user_id'] = $user->id;
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $error_message = "Invalid username or password.";
+        }
     } else {
-        $error_message = "Invalid username or password.";
+        $error_message = "Username or password not provided.";
     }
 }
 ?>
@@ -26,15 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
     <div class="container">
         <h1>Login</h1>
         <?php if (isset($error_message)): ?>
-            <p style="color: red;"><?php echo $error_message; ?></p>
+            <p class="error-message"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></p>
         <?php endif; ?>
-        <form method="POST">
+        <form method="POST" action="">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" required>
 

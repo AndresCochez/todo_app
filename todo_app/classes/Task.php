@@ -47,20 +47,28 @@ class Task {
 
     // Method to create a task
     public function create() {
-        // Check if a task with the same title already exists in the list
+        // Check if the list_id is set
+        if (empty($this->list_id)) {
+            throw new Exception("The list ID must be set before creating a task.");
+        }
+
+        // Check if a task with the same title already exists in the specific list
         if ($this->checkDuplicate($this->list_id, $this->title)) {
             throw new Exception("A task with this title already exists in the list.");
         }
 
+        // Prepare the SQL query
         $query = "INSERT INTO " . $this->table_name . " SET list_id=:list_id, title=:title, description=:description, deadline=:deadline, is_done=:is_done";
         $stmt = $this->conn->prepare($query);
 
+        // Bind parameters
         $stmt->bindParam(":list_id", $this->list_id, PDO::PARAM_INT);
         $stmt->bindParam(":title", $this->title);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":deadline", $this->deadline);
         $stmt->bindParam(":is_done", $this->is_done, PDO::PARAM_INT);
 
+        // Execute the query
         if ($stmt->execute()) {
             return true;
         } else {

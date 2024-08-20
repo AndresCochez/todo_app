@@ -24,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
     <div class="container">
         <h1>Register</h1>
         <?php if (isset($error_message)): ?>
-            <p style="color: red;"><?php echo $error_message; ?></p>
+            <p class="error-message"><?php echo $error_message; ?></p>
         <?php endif; ?>
         <form method="POST">
             <label for="username">Username</label>
