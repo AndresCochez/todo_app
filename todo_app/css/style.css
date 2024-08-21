@@ -1,96 +1,263 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #2d72b7;
-    padding: 20px;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-form {
-    margin-bottom: 20px;
-}
-
-input[type="text"], textarea {
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 60%;
-    margin-bottom: 10px;
-}
-
-textarea {
-    width: calc(100% - 22px);
-    height: 80px;
-    resize: none;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button.btn-danger {
-    background-color: #dc3545;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-ul {
-    list-style: none;
+/* Algemene reset voor betere compatibiliteit */
+* {
+    box-sizing: border-box;
+    margin: 0;
     padding: 0;
 }
 
-ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-ul li:last-child {
-    border-bottom: none;
-}
-
-table {
+/* Basisstijl voor het container-div om ervoor te zorgen dat het schermvullend is */
+.container {
     width: 100%;
-    border-collapse: collapse;
-}
-
-table th, table td {
     padding: 10px;
-    border: 1px solid #ddd;
+    margin: 0 auto;
+    max-width: 100%;
 }
 
-table th {
-    background-color: #f8f9fa;
+/* Header styling voor mobiele schermen */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-container h1 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.header-container form {
+    margin-top: 10px;
+}
+
+/* Formulierstijlen voor mobiel */
+.form-inline {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-inline input[type="text"],
+.form-inline textarea,
+.form-inline input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-inline button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+.form-inline button:hover {
+    background-color: #0056b3;
 }
 
-input[type="date"] {
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 60%;
+/* Lijst en taakweergave op mobiel */
+h2 {
+    font-size: 1.3em;
+    margin-top: 20px;
     margin-bottom: 10px;
+    text-align: center;
+}
+
+p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Tabelstijl voor taken op mobiel */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    word-wrap: break-word;
+    vertical-align: top;
+}
+
+.table th {
+    font-size: 1em;
+}
+
+.table td:last-child {
+    text-align: center;
+}
+
+.update-status {
+    width: 20px;
+    height: 20px;
+}
+
+/* Comment sectie */
+.comment-form textarea {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background-color: #5a6268;
+}
+
+ul {
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
+ul li {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+/* Buttons for delete and upload file section */
+.btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Upload en bestandensectie voor mobiel */
+#upload-section,
+#files-section {
+    display: none;
+}
+
+#upload-section h3,
+#files-section h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#upload-section form,
+#files-section form {
+    width: 100%;
+}
+
+.table-striped th,
+.table-striped td {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table-striped td:last-child {
+    text-align: center;
+}
+
+.table-striped tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+    }
+
+    .header-container h1 {
+        font-size: 1.2em;
+    }
+
+    .form-inline input[type="text"],
+    .form-inline textarea,
+    .form-inline input[type="date"],
+    .form-inline button {
+        font-size: 0.9em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .table th,
+    .table td {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 0.9em;
+    }
 }

@@ -256,7 +256,7 @@ foreach ($tasks as $task) {
                                         <!-- Delete task button -->
                                         <form method="POST" action="dashboard.php" style="display:inline;">
                                             <input type="hidden" name="delete_task_id" value="<?php echo $task['id']; ?>">
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete Task</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -274,8 +274,8 @@ foreach ($tasks as $task) {
                 </form>
 
                 <?php if (count($tasks) > 0): ?>
-                    <button id="show-upload-btn" class="btn btn-primary">Show Upload File</button>
-                    <button id="show-files-btn" class="btn btn-secondary">Show Uploaded Files</button>
+                    <button id="show-upload-btn" class="btn btn-primary">Upload File</button>
+                    <button id="show-files-btn" class="btn btn-secondary">Uploaded Files</button>
 
                     <!-- File upload form -->
                     <div id="upload-section" style="display: none;">
