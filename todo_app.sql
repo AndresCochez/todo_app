@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 aug 2024 om 13:45
+-- Gegenereerd op: 22 aug 2024 om 16:29
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -35,15 +35,6 @@ CREATE TABLE `files` (
   `task_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Gegevens worden geëxporteerd voor tabel `files`
---
-
-INSERT INTO `files` (`id`, `file_name`, `file_path`, `uploaded_on`, `task_name`) VALUES
-(12, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:20:33', 'sdjcj'),
-(13, 'Icoon.png', 'uploads/Icoon.png', '2024-08-12 13:27:44', 'Andres'),
-(14, 'Icoon (3).png', 'uploads/Icoon (3).png', '2024-08-12 13:37:05', 'Dreke');
-
 -- --------------------------------------------------------
 
 --
@@ -56,13 +47,6 @@ CREATE TABLE `lists` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `lists`
---
-
-INSERT INTO `lists` (`id`, `user_id`, `name`, `description`) VALUES
-(11, 1, 'Test', 'slc,qsl,c,');
 
 -- --------------------------------------------------------
 
@@ -78,14 +62,6 @@ CREATE TABLE `tasks` (
   `deadline` date DEFAULT NULL,
   `is_done` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `tasks`
---
-
-INSERT INTO `tasks` (`id`, `list_id`, `title`, `description`, `deadline`, `is_done`) VALUES
-(30, 11, 'zkodzoék', 'zal;saz,;s', '0000-00-00', NULL),
-(31, 11, 'scx;kz;d', 'zx,;l;z,szl,s', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -167,31 +143,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT voor een tabel `lists`
 --
 ALTER TABLE `lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT voor een tabel `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT voor een tabel `task_comments`
 --
 ALTER TABLE `task_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

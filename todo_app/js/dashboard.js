@@ -1,12 +1,14 @@
 $(document).ready(function() {
-    // Event handler for sorting tasks
+    // Event handler voor het sorteren van taken
     $('a[data-sort]').click(function(event) {
         event.preventDefault();
 
+        // Haal het soort sortering en de huidige sorteervolgorde op
         let sortType = $(this).data('sort');
         let sortOrder = $(this).data('order') === 'ASC' ? 'DESC' : 'ASC';
         $(this).data('order', sortOrder);
 
+        // Voer een AJAX-aanroep uit om de taken te sorteren
         $.ajax({
             type: 'POST',
             url: 'dashboard.php',
@@ -19,7 +21,7 @@ $(document).ready(function() {
                 let tasks = data.tasks;
                 let comments = data.comments;
 
-                // Update the task list
+                // Update de taaklijst met gesorteerde taken
                 let taskList = $('#task-list');
                 taskList.empty();
                 tasks.forEach(function(task) {
@@ -58,11 +60,12 @@ $(document).ready(function() {
         });
     });
 
-    // Event handler for updating task status
+    // Event handler voor het bijwerken van de taakstatus
     $(document).on('change', '.update-status', function() {
         let taskId = $(this).data('task-id');
         let isDone = $(this).is(':checked');
         
+        // Voer een AJAX-aanroep uit om de status van de taak bij te werken
         $.ajax({
             type: 'POST',
             url: 'dashboard.php',
@@ -71,18 +74,19 @@ $(document).ready(function() {
                 is_done: isDone
             },
             success: function(response) {
-                alert(response);
+                alert(response); // Toon een bericht met de serverrespons
             }
         });
     });
 
-    // Event handler for adding comments
+    // Event handler voor het toevoegen van opmerkingen
     $(document).on('submit', '.comment-form', function(event) {
         event.preventDefault();
         
         let form = $(this);
         let formData = form.serialize();
         
+        // Voer een AJAX-aanroep uit om een opmerking toe te voegen
         $.ajax({
             type: 'POST',
             url: 'dashboard.php',
@@ -91,19 +95,21 @@ $(document).ready(function() {
                 let data = JSON.parse(response);
                 if (data.status === 'success') {
                     let taskId = form.find('input[name="task_id"]').val();
+                    
+                    // Na een succesvolle toevoeging van de opmerking, herlaad de taaklijst
                     $.ajax({
                         type: 'POST',
                         url: 'dashboard.php',
                         data: {
-                            sort_type: 'deadline', // default sort type
-                            sort_order: 'ASC' // default sort order
+                            sort_type: 'deadline', // Standaard sorteervolgorde
+                            sort_order: 'ASC' // Standaard sorteervolgorde
                         },
                         success: function(response) {
                             let data = JSON.parse(response);
                             let tasks = data.tasks;
                             let comments = data.comments;
                             
-                            // Update the task list
+                            // Update de taaklijst met de nieuwe opmerking
                             let taskList = $('#task-list');
                             taskList.empty();
                             tasks.forEach(function(task) {
@@ -141,7 +147,7 @@ $(document).ready(function() {
                         }
                     });
                 } else {
-                    alert(data.message);
+                    alert(data.message); // Toon een foutmelding als de toevoeging niet is gelukt
                 }
             }
         });

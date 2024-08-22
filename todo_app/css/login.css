@@ -1,81 +1,92 @@
-/* General Reset */
+/* Algemene reset om marges, padding en box-sizing consistent te maken */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; /* Verwijder alle marges */
+    padding: 0; /* Verwijder alle padding */
+    box-sizing: border-box; /* Zorg ervoor dat padding en border worden meegenomen in de breedte en hoogte van elementen */
 }
 
+/* Stijl voor de body van de pagina */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #2d72b7;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif; /* Zet het lettertype voor de hele pagina */
+    background-color: #2d72b7; /* Achtergrondkleur van de pagina */
+    color: #333; /* Kleur van de tekst op de pagina */
+    display: flex; /* Gebruik flexbox voor het centreren van de container */
+    justify-content: center; /* Centreer de container horizontaal */
+    align-items: center; /* Centreer de container verticaal */
+    height: 100vh; /* Zet de hoogte van de body op 100% van het viewport */
 }
 
+/* Container voor inhoud, zoals formulieren of berichten */
 .container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+    background: #fff; /* Achtergrondkleur van de container */
+    padding: 2rem; /* Voeg padding toe voor ruimte binnen de container */
+    border-radius: 8px; /* Verhoog de hoeken van de container voor een afgerond effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Voeg een subtiele schaduw toe voor diepte */
+    width: 100%; /* Zet de breedte van de container op 100% van het element */
+    max-width: 400px; /* Beperk de breedte tot maximaal 400px */
+    text-align: center; /* Centreer de tekst binnen de container */
 }
 
+/* Stijl voor de hoofdtitel */
 h1 {
-    margin-bottom: 1rem;
-    color: #333;
+    margin-bottom: 1rem; /* Voeg ruimte onder de titel toe */
+    color: #333; /* Kleur van de titeltekst */
 }
 
+/* Stijl voor labels van formulierinvoervelden */
 label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+    display: block; /* Maak labels blok-elementen zodat ze op een nieuwe regel staan */
+    margin-bottom: 0.5rem; /* Voeg ruimte onder de labels toe */
+    font-weight: bold; /* Maak de tekst van labels vetgedrukt */
 }
 
+/* Algemene stijl voor tekst- en wachtwoordinvoervelden */
 input[type="text"],
 input[type="password"] {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+    width: 100%; /* Zet de breedte van invoervelden op 100% van hun container */
+    padding: 0.75rem; /* Voeg padding toe binnen de invoervelden */
+    margin-bottom: 1rem; /* Voeg ruimte onder de invoervelden toe */
+    border: 1px solid #ccc; /* Voeg een lichtgrijze rand toe aan de invoervelden */
+    border-radius: 4px; /* Verhoog de hoeken voor een afgerond effect */
+    font-size: 1rem; /* Zet de lettergrootte van de tekst in invoervelden */
 }
 
+/* Stijl voor knoppen */
 button {
-    width: 100%;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
+    width: 100%; /* Zet de breedte van de knop op 100% van de container */
+    padding: 0.75rem; /* Voeg padding toe binnen de knop */
+    border: none; /* Verwijder de standaard rand van knoppen */
+    border-radius: 4px; /* Verhoog de hoeken voor een afgerond effect */
+    background-color: #007bff; /* Achtergrondkleur van de knop */
+    color: #fff; /* Tekstkleur van de knop */
+    font-size: 1rem; /* Zet de lettergrootte van de knoptekst */
+    cursor: pointer; /* Verander de cursor naar een pointer bij hover */
 }
 
+/* Hover-effect voor knoppen */
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Donkere achtergrondkleur bij hover voor een visuele feedback */
 }
 
+/* Stijl voor foutmeldingen */
 .error-message {
-    color: #ff0000;
-    margin-bottom: 1rem;
+    color: #ff0000; /* Kleur van de foutmeldingstekst */
+    margin-bottom: 1rem; /* Voeg ruimte onder de foutmelding toe */
 }
 
+/* Stijl voor paragrafen */
 p {
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    margin-top: 1rem; /* Voeg ruimte boven paragrafen toe */
+    font-size: 0.9rem; /* Zet de lettergrootte van paragrafen iets kleiner */
 }
 
+/* Stijl voor links */
 a {
-    color: #007bff;
-    text-decoration: none;
+    color: #007bff; /* Kleur van de linktekst */
+    text-decoration: none; /* Verwijder de standaard onderstreping van links */
 }
 
+/* Hover-effect voor links */
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Voeg onderstreping toe bij hover om aan te geven dat het een klikbare link is */
 }

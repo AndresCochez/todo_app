@@ -1,0 +1,113 @@
+/* Algemene stijl voor de body van de pagina */
+body {
+    font-family: Arial, sans-serif; /* Zet het lettertype voor de hele pagina */
+    background-color: #2d72b7; /* Achtergrondkleur van de pagina */
+    padding: 20px; /* Voeg padding toe aan de body voor ruimte aan de randen */
+}
+
+/* Container die de hoofdinhoud bevat */
+.container {
+    max-width: 800px; /* Maximaal breedte van de container */
+    margin: auto; /* Centreer de container horizontaal */
+    background: #fff; /* Achtergrondkleur van de container */
+    padding: 20px; /* Voeg padding toe aan de binnenkant van de container */
+    border-radius: 5px; /* Verhoog de hoeken van de container voor een afgerond effect */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Voeg een subtiele schaduw toe voor diepte */
+}
+
+/* Stijl voor de hoofdtitel */
+h1 {
+    margin-bottom: 20px; /* Voeg ruimte onder de titel toe */
+}
+
+/* Stijl voor formulieren */
+form {
+    margin-bottom: 20px; /* Voeg ruimte onder formulieren toe */
+}
+
+/* Algemene stijl voor tekstinvoer en tekstvakken */
+input[type="text"], textarea {
+    padding: 10px; /* Voeg padding toe voor betere leesbaarheid */
+    margin-right: 10px; /* Voeg ruimte toe aan de rechterkant */
+    border: 1px solid #ddd; /* Voeg een lichtgrijze rand toe */
+    border-radius: 5px; /* Verhoog de hoeken voor een afgerond effect */
+    width: 60%; /* Zet de breedte van invoervelden op 60% van de container */
+    margin-bottom: 10px; /* Voeg ruimte onder de invoervelden toe */
+}
+
+/* Stijl specifiek voor tekstvakken */
+textarea {
+    width: calc(100% - 22px); /* Breedte van textarea met correctie voor padding en border */
+    height: 80px; /* Zet de hoogte van de textarea */
+    resize: none; /* Voorkom dat de gebruiker de grootte van de textarea kan aanpassen */
+}
+
+/* Stijl voor knoppen */
+button {
+    padding: 10px 20px; /* Voeg padding toe aan de knoppen */
+    background-color: #007bff; /* Achtergrondkleur van de knop */
+    color: #fff; /* Tekstkleur van de knop */
+    border: none; /* Verwijder de standaard rand van knoppen */
+    border-radius: 5px; /* Verhoog de hoeken voor een afgerond effect */
+    cursor: pointer; /* Verander de cursor naar een pointer bij hover */
+}
+
+/* Stijl voor knoppen met de klasse .btn-danger */
+button.btn-danger {
+    background-color: #dc3545; /* Achtergrondkleur van gevaarlijke knoppen (bijv. verwijderen) */
+}
+
+/* Hover-effect voor knoppen */
+button:hover {
+    opacity: 0.8; /* Maak de knop iets transparanter bij hover */
+}
+
+/* Stijl voor ongenummerde lijsten */
+ul {
+    list-style: none; /* Verwijder de standaard opsommingstekens */
+    padding: 0; /* Verwijder de standaard padding */
+}
+
+/* Stijl voor lijstitems */
+ul li {
+    padding: 10px; /* Voeg padding toe aan elk lijstitem */
+    border-bottom: 1px solid #ddd; /* Voeg een scheidingslijn onder elk lijstitem toe */
+}
+
+/* Verwijder de onderrand van het laatste lijstitem */
+ul li:last-child {
+    border-bottom: none;
+}
+
+/* Stijl voor tabellen */
+table {
+    width: 100%; /* Zet de breedte van de tabel op 100% van de container */
+    border-collapse: collapse; /* Verwijder dubbele randen tussen cellen */
+}
+
+/* Stijl voor tabelkoppen en cellen */
+table th, table td {
+    padding: 10px; /* Voeg padding toe aan cellen */
+    border: 1px solid #ddd; /* Voeg een lichtgrijze rand toe aan cellen */
+}
+
+/* Stijl voor tabelkoppen */
+table th {
+    background-color: #f8f9fa; /* Achtergrondkleur van tabelkoppen */
+    cursor: pointer; /* Verander de cursor naar een pointer bij hover */
+}
+
+/* Achtergrondkleur voor even rijen in tabellen */
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Stijl voor datuminvoer */
+input[type="date"] {
+    padding: 10px; /* Voeg padding toe voor betere leesbaarheid */
+    margin-right: 10px; /* Voeg ruimte toe aan de rechterkant */
+    border: 1px solid #ddd; /* Voeg een lichtgrijze rand toe */
+    border-radius: 5px; /* Verhoog de hoeken voor een afgerond effect */
+    width: 60%; /* Zet de breedte van datuminvoer op 60% van de container */
+    margin-bottom: 10px; /* Voeg ruimte onder datuminvoer toe */
+}
